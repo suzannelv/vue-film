@@ -44,12 +44,14 @@
     <search/>
   </div>
 
-  <!-- Section films populaires 数据获取失败，之后解决 -->
+  <!-- Section films populaires -->
   <popularMovies/>
+
 
   <!-- Section TV populaires -->
   <popularTv/>
 
+<!-- <tabs/> -->
 
 </template>
 
@@ -57,6 +59,9 @@
 import search from './cpns/search.vue';
 import popularMovies from './cpns/popularMovies.vue';
 import popularTv from './cpns/popularTv.vue';
+
+import tabs from '@/components/tabs/tabs.vue';
+
 
 </script>
 

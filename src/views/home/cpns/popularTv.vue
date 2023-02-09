@@ -1,33 +1,13 @@
 <template>
-  <div class="popular-tv">
-    <template v-for="(item, index) in movieData" :key="index">
-      <div class="tv-item">
-        {{ item.name }}
-        
-      </div>
-    </template>
-  </div>
+  <div class="container mt-5 popular-tv border-top">
+    <h2 class="text-center py-3">Popular TV</h2>
+    <TvCard/>
+ </div>
 </template>
 
-<script>
-import axios from 'axios';
-export default {
-  data() {
-    return {
-      movieData: null,
-    };
-  },
-  mounted() {
-    axios.get('https://sangria-walkingstick-kit.cyclic.app/api/movies')
-      .then(response => {
-        this.movieData = res;
-        console.log(res)
-      });
-     
-  },
+<script setup>
 
-};
-
+import TvCard from './tvCard.vue';
 
 </script>
 

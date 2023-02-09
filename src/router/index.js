@@ -15,6 +15,17 @@ const router = createRouter({
   
     }, 
     {
+      path:"/popularmovies",
+      component: () => import ("@/views/home/cpns/popularMovies.vue")
+  
+    }, 
+    {
+      path:"/populartv",
+      component: () => import ("@/views/home/cpns/popularTv.vue")
+  
+    }, 
+
+    {
       path:"/movie",
       component: () => import("@/views/movie/movie.vue")
     },
