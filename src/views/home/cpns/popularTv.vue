@@ -7,7 +7,7 @@
 
 <script setup>
 
-import TvCard from './tvCard.vue';
+import TvCard from '@/components/tvCard/tvCard.vue';
 
 </script>
 

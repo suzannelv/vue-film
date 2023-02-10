@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import moviecard from './movieCard.vue'
+import moviecard from '@/components/movieCard/movieCard.vue'
 </script>
 
 <style lang="less" scoped>
