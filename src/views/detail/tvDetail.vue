@@ -1,27 +1,20 @@
 <template>
   <div class="detail container-fluid my-5">
-    <div class="row movie-info d-flex align-items-center ">
+    <div class="row tv-info d-flex align-items-center ">
       <div class="col offset-md-1 poster text-center">
        <div :style="bgPoster">
         <!-- <img :src="bgPoster + detailMovie.backdrop_path" alt="" /> -->
       </div>
-        <img :src="posterPath + detailMovie.poster_path" alt="`${detailMovie.title}` poster">
+        <img :src="posterPath + detailTv.poster_path" alt="`${detailTv.title}` poster">
       </div>
       <div class="col infos">
-        <h1>{{ detailMovie.title }}</h1>
-        <!-- type du film -->
-        <div v-if="detailMovie
-        .genres">
-        {{ detailMovie.genres.slice(0, 3).map(genre => genre.name).join(' &#8226 ') }}
-      </div>
-        <div class="movie_info ms-3">
-            <span class="star_vote"><fa icon="star" class="star_vote me-1"/>{{ detailMovie.vote_average }}</span> | 
-            <span>{{ detailMovie.original_language }}</span> |
-            <span>{{ detailMovie.release_date }}</span> |
-            <span>{{ detailMovie.runtime }}min</span>
-            <div v-if="detailMovie.production_companies" class="my-3 fw-bolder">
-              {{detailMovie.production_companies.map(company => company.name).join(',') }}
-            </div>
+        <h1>{{ detailTv.name }}</h1>
+        <h2 class="text-secondary">({{ detailTv.original_name }})</h2>
+        <span v-if="detailTv.first_air_date" class="text-secondary">({{ detailTv.first_air_date }})</span>
+       
+        <div class="tv_info mt-1">
+            <span class="star_vote"><fa icon="star" class="star_vote me-1"/>{{ detailTv.vote_average }}</span> | 
+            <span v-if="detailTv.original_language">{{ detailTv.original_language }}</span>
         </div>
         <div class="join my-3">
           <router-link :to="'/subscription'">
@@ -31,7 +24,7 @@
 
         <div class="description my-3">
           <p> 
-            <span class="text-secondary fw-">Description:</span> {{ detailMovie.overview }}
+            <span class="text-secondary fw-">Description:</span> {{ detailTv.overview }}
           </p>
         </div>
 
@@ -41,14 +34,16 @@
     </div>
   </div>
 
-  <!-- films similaires-->
-       <SimilarMovie/>
+
+  <!-- recommandation tv-->
+
+  <similarTv/>
 </template>
 
 <script>
 import tmdb from '@/services/tmdb';
 import buttonTag from '@/components/button-tag/button-tag.vue';
-import SimilarMovie from '@/components/similarMovie/similarMovie.vue';
+import similarTv from '@/components/similarTv/similarTv.vue';
 import { useRoute} from 'vue-router';
 import { ref, computed, onMounted } from 'vue';
 
@@ -57,20 +52,20 @@ export default {
     setup() {
         // Obtenir l'identité de chaque film
         const route = useRoute();
-        const movieId = route.params.id;
-        // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const detailMovie = ref({});
-        // récupérer les données de chaque film selon leur id
-        const fetchDetailMovie = async () => {
+        const tvId = route.params.id;
+        // définir une référence appelée detailTv qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
+        const detailTv = ref({});
+        // récupérer les données de chaque tv selon leur id
+        const fetchDetailTv = async () => {
             try {
-                const response = await tmdb.get(`movie/${movieId}?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US`);
-                detailMovie.value = response.data;
+                const response = await tmdb.get(`tv/${tvId}?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US`);
+                detailTv.value = response.data;
             }
             catch (error) {
                 console.error(error);
             }
         };
-        //  récupérer l'URL d'image des films
+        //  récupérer l'URL d'image des tvs
         const posterPath = computed(() => {
             return "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
         });
@@ -79,15 +74,15 @@ export default {
         })
         // obtenir les données du film et les stocker dans le detailMovie
         onMounted(() => {
-            fetchDetailMovie();
+            fetchDetailTv();
         });
         return {
-            detailMovie,
+            detailTv,
             posterPath,
             bgPoster
         };
     },
-    components: { SimilarMovie, buttonTag }
+    components: { buttonTag, similarTv }
 };
 
 </script>
@@ -101,7 +96,7 @@ export default {
 //   z-index: 2;
 
 // }
-.movie-info {
+.tv-info {
   background: url("bgPoster + detailMovie.backdrop_path");
 }
 .infos {

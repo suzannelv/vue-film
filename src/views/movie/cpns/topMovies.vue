@@ -1,23 +1,23 @@
-<template>
-  <div class="container-fluid similar-movie text-center">
+<template> 
+  <div class="container top-movie text-center">
     <span class="diviser-line d-inline-block mb-4"></span>
-    <h2>Similar Movies</h2>
+    <h2>Top List</h2>
     <div class="row my-5">
        <div class="col d-flex flex-wrap">
-         <template v-for="movie in similarMovies.results" :key="movie.id">
+         <template v-for="movie in topMovies.results" :key="movie.id">
           <div class="movie-card">
             <div class="poster" v-if="movie.poster_path">
                 <img :src="posterPath + movie.poster_path" alt="poster">
-            </div>
+              </div>
               <!-- pour le films manque key:poster_path,nous avons ajouté d'une façon locale -->
-            <div v-else>
+              <div v-else>
                 <img src="@/assets/img/poster_path/the-well.jpg" alt="The Well">
-            </div>
-            <div class="text">
-              <h5>{{ movie.title }}</h5>  
-              <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
-              <p>Popularity: {{ movie.popularity }}</p>
-            </div>
+              </div>
+              <div class="text">
+                <h5>{{ movie.title }}</h5>  
+                <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
+                <p>Popularity: {{ movie.popularity }}</p>
+              </div>
           </div>
                
         </template>
@@ -37,13 +37,13 @@ export default {
         const route = useRoute();
         const movieId = route.params.id;
         // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const similarMovies = ref({});
+        const topMovies = ref({});
 
         // récupérer les données de chaque film selon leur id
-        const fetchSimilarMovie = async () => {
+        const fetchTopMovie = async () => {
             try {
-                const response = await tmdb.get(`movie/${movieId}/similar?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1`);
-                similarMovies.value = response.data;
+                const response = await tmdb.get("movie/top_rated?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1");
+                topMovies.value = response.data;
             }
             catch (error) {
                 console.error(error);
@@ -56,10 +56,10 @@ export default {
         // obtenir les données du film et les stocker dans le detailMovie
      
         onMounted(() => {
-          fetchSimilarMovie();
+          fetchTopMovie();
         });
         return {
-          similarMovies,
+          topMovies,
           posterPath,
   
         };

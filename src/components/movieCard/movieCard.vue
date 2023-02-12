@@ -4,7 +4,7 @@
       <template v-for="movie in movies" :key="movie.id">
       <div class="col my-4" @click="itemClick(movie.id)">
         <div class="card" style="width: 18rem;">
-          <img :src="posterPath + movie.poster_path" class="card-img-top" alt="poster">
+          <img :src="posterPath + movie.poster_path" class="card-img-top" alt="movie-poster">
           <div class="card-body reset-size">
             <h5 class="card-title">{{movie.title}}</h5>
             <p class="card-text">{{ movie.vote_average }} <fa icon="thumbs-up" class="thumbs-up"/></p>

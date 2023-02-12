@@ -1,9 +1,17 @@
 
 :root {
   --primary-color:#9ae4e6;
+  background-color: rgba(31.5, 31.5, 10.5, 1);
+
 }
 
 body {
   font-size: 14px;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.diviser-line {
+  background-color:rgb(235, 237, 237);
+  width: 800px;
+  height: 2px;
 }

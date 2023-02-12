@@ -2,7 +2,7 @@
   <div class="nav-bar">
     <!-- narbar item -->
     <div class="px-3 py-2 text-bg-dark">
-      <div class="container">
+      <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-lg-start" >
           <!-- logo du site -->
           <router-link to="/home">
@@ -10,14 +10,17 @@
           </router-link>
 
           <!-- Parcourir les 'item' de Navbar dans navbar.js -->
-          <template v-for="(item, index) in navbarData">
-            <div class="nav-bar-item d-flex mx-3 align-items-center" 
-                 :class="{ active: currentIndex === index }"
-                @click="itemClick(index, item)">
-              <span>{{ item.icon }}</span>
-              <span>{{ item.text }}</span>
-            </div>
+
+            <template v-for="(item, index) in navbarData">
+              <div class="nav-bar-item nav-item d-flex mx-3 align-items-center"
+                   :class="{ active: currentIndex === index }"
+                   @click="itemClick(index, item)">
+                <span>{{ item.icon }}</span>
+                <span>{{ item.text }}</span>
+              </div>
           </template>
+        
+          
 
             <!-- Login/sign up -->
           <div class="text-end">
