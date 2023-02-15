@@ -41,7 +41,10 @@ const router = createRouter({
     
     {
       path:"/subscription",
-      component: () => import("@/views/subscription/subscription.vue")
+      component: () => import("@/views/subscription/subscription.vue"),
+      meta: {
+        hideNoticeBar:true
+      }
     }, 
 
     {

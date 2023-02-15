@@ -1,13 +1,13 @@
 <template>
   <div class="container mt-5 popular-tv border-top">
     <h2 class="text-center py-3">Popular TV</h2>
-    <TvCard/>
+    <pTvCard/>
  </div>
 </template>
 
 <script setup>
 
-import TvCard from '@/components/tvCard/tvCard.vue';
+import pTvCard from '@/components/tvCard/pTvCard.vue';
 
 </script>
 

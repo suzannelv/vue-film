@@ -4,8 +4,8 @@
     <h2>Coming Soon</h2>
     <div class="row my-5">
        <div class="col d-flex flex-wrap">
-         <template v-for="movie in comingMovies.results" :key="movie.id">
-          <div class="movie-card">
+         <template v-for="movie in comingMovies" :key="movie.id">
+          <div class="movie-card" @click="itemClick(movie.id)" >
             <div class="poster" v-if="movie.poster_path">
               <img :src="posterPath + movie.poster_path" alt="poster">
             </div>
@@ -18,54 +18,42 @@
                 <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
                 <p>Popularity: {{ movie.popularity }}</p>
               </div>
-          </div>
-               
+          </div>      
         </template>
       </div>
     </div>
+
+    <button @click="more">more</button>
   </div>
 </template>
 
-<script>
-import tmdb from '@/services/tmdb';
-import { useRoute } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
+<script setup>
 
-export default {
-    setup() {
-        // Obtenir l'identité de chaque film
-        const route = useRoute();
-        const movieId = route.params.id;
-        // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const comingMovies = ref({});
+import { moviePosterPath } from '@/services/request/config';
+import useMoviesStore from '@/stores/modules/movieStore';
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 
-        // récupérer les données de chaque film selon leur id
-        const fetchComingMovie = async () => {
-            try {
-                const response = await tmdb.get("movie/upcoming?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1");
-                comingMovies.value = response.data;
-            }
-            catch (error) {
-                console.error(error);
-            }
-        };
-        //  récupérer l'URL d'image des films
-        const posterPath = computed(() => {
-            return "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
-        });
-        // obtenir les données du film et les stocker dans le detailMovie
-     
-        onMounted(() => {
-          fetchComingMovie();
-        });
-        return {
-          comingMovies,
-          posterPath,
-  
-        };
-    },
-  
-};
+// récupérer les données sur les films à venir dans les stores movie
+const comingMoviesStore = useMoviesStore()
+comingMoviesStore.fetchComingMovies()
+const {comingMovies} = storeToRefs(comingMoviesStore)
+
+// importer et utiliser le chemin d'accès commun aux affiches des films pour afficher les images dans l'application.
+const posterPath = moviePosterPath
+
+/**
+ * Lorsque la fonction itemClick est appelée, elle prend un argument id, qui est l'identifiant du film sélectionné. La fonction utilise ensuite la méthode push de l'objet router pour naviguer vers la route "/detail/" + id. 
+ *
+ */
+const router = useRouter()
+const itemClick = (id) => {
+  router.push("/detail/" + id)
+}
+
+const more = () => {
+  comingMoviesStore.fetchComingMovies()
+}
 
 </script>
 

@@ -4,8 +4,8 @@
     <h2>TV Show on Air</h2>
     <div class="row my-5">
        <div class="col d-flex flex-wrap">
-         <template v-for="tv in topTvs.results" :key="tv.id">
-          <div class="tv-card">
+         <template v-for="tv in latestTv" :key="tv.id">
+          <div class="tv-card"  @click="itemClick(tv.id)">
             <div class="poster" v-if="tv.poster_path">
                 <img :src="posterPath + tv.poster_path" alt="poster">
               </div>
@@ -22,45 +22,28 @@
   </div>
 </template>
 
-<script>
-import tmdb from '@/services/tmdb';
-import { useRoute } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
+<script setup>
+import { tvPosterPath } from '@/services/request/config';
+import useTvStore from '@/stores/modules/tvStore';
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 
-export default {
-    setup() {
-        // Obtenir l'identité de chaque film
-        const route = useRoute();
-        const tvId = route.params.id;
-        // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const topTvs = ref({});
+// récupérer les données sur les films à venir dans les stores tv
+const latestTvStore = useTvStore()
+latestTvStore.fetchLatestTv()
+const {latestTv} = storeToRefs(latestTvStore)
 
-        // récupérer les données de chaque film selon leur id
-        const fetchTopTv = async () => {
-            try {
-                const response = await tmdb.get("https://api.themoviedb.org/3/tv/on_the_air?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1");
-                topTvs.value = response.data;
-            }
-            catch (error) {
-                console.error(error);
-            }
-        };
-        //  récupérer l'URL d'image des tv
-        const posterPath = computed(() => {
-            return "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
-        });
-     
-        onMounted(() => {
-          fetchTopTv();
-        });
-        return {
-          topTvs,
-          posterPath,
-  
-        };
-    },
-  
-};
+// importer et utiliser le chemin d'accès commun aux affiches des tvs pour afficher les images dans l'application.
+const posterPath = tvPosterPath
+
+/**
+ * Lorsque la fonction itemClick est appelée, elle prend un argument id, qui est l'identifiant de la tv sélectionné. La fonction utilise ensuite la méthode push de l'objet router pour naviguer vers la route "/detailtv/" + id. 
+ *
+ */
+ const router = useRouter()
+const itemClick = (id) => {
+  router.push("/detailtv/" + id)
+}
 
 </script>
 

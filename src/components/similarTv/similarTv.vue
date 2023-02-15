@@ -9,17 +9,12 @@
             <div class="poster" v-if="tv.poster_path">
                 <img :src="posterPath + tv.poster_path" alt="poster">
             </div>
-              <!-- pour le films manque key:poster_path,nous avons ajouté d'une façon locale -->
-            <!-- <div v-else>
-                <img src="@/assets/img/poster_path/the-well.jpg" alt="The Well">
-            </div> -->
             <div class="text">
               <h5>{{ tv.title }}</h5>  
               <small class="text-secondary" v-if="tv.release_date">({{ tv.release_date }})</small>
               <p>Popularity: {{tv.popularity }}</p>
             </div>
-          </div>
-               
+          </div>    
         </template>
       </div>
     </div>

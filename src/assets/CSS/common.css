@@ -1,7 +1,8 @@
 
 :root {
   --primary-color:#9ae4e6;
-  background-color: rgba(31.5, 31.5, 10.5, 1);
+  --van-notice-bar-background: #fff !important;
+
 
 }
 

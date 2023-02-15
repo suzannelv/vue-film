@@ -35,7 +35,8 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
-</div>
+    </div>
+    
   </div>
 
 
@@ -46,7 +47,6 @@
 
   <!-- Section films populaires -->
   <popularMovies/>
-
 
   <!-- Section TV populaires -->
   <popularTv/>
@@ -59,10 +59,6 @@
 import search from './cpns/search.vue';
 import popularMovies from './cpns/popularMovies.vue';
 import popularTv from './cpns/popularTv.vue';
-
-
-
-
 </script>
 
 <style lang="less" scoped>

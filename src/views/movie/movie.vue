@@ -88,6 +88,7 @@ export default {
             try {
                 const response = await tmdb.get("movie/now_playing?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1");
                 nowMovie.value = response.data;
+        
             }
             catch (error) {
                 console.error(error);

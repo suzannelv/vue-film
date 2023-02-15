@@ -1,6 +1,6 @@
 <template>
   <div class="contact container mt-5">
-    <h1>Contact US</h1>
+    <h1>Contact Us</h1>
     <p>Get a Quick Reply Within 48 Hours!</p>
     <div class="input-group mb-3">
    

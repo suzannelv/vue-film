@@ -2,9 +2,6 @@
   <div class="detail container-fluid my-5">
     <div class="row movie-info d-flex align-items-center ">
       <div class="col offset-md-1 poster text-center">
-       <div :style="bgPoster">
-        <!-- <img :src="bgPoster + detailMovie.backdrop_path" alt="" /> -->
-      </div>
         <img :src="posterPath + detailMovie.poster_path" alt="`${detailMovie.title}` poster">
       </div>
       <div class="col infos">
@@ -45,65 +42,51 @@
        <SimilarMovie/>
 </template>
 
-<script>
-import tmdb from '@/services/tmdb';
+<script setup>
+
+import ffRequest from '@/services/request/index'
 import buttonTag from '@/components/button-tag/button-tag.vue';
 import SimilarMovie from '@/components/similarMovie/similarMovie.vue';
+import { moviePosterPath, API_KEY } from '@/services/request/config';
 import { useRoute} from 'vue-router';
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 
 
-export default {
-    setup() {
-        // Obtenir l'identité de chaque film
-        const route = useRoute();
-        const movieId = route.params.id;
-        // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const detailMovie = ref({});
-        // récupérer les données de chaque film selon leur id
-        const fetchDetailMovie = async () => {
-            try {
-                const response = await tmdb.get(`movie/${movieId}?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US`);
-                detailMovie.value = response.data;
+  // Obtenir l'identité de chaque film
+  const route = useRoute();
+  const movieId = route.params.id;
+
+  // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
+  const detailMovie = ref({});
+
+  // récupérer les données de chaque film selon leur id
+  const fetchDetailMovie = async () => {
+      try {
+          const response = await ffRequest.get({
+            url: `movie/${movieId}`,
+            params: {
+              api_key: API_KEY,
+              language:'en-US' 
             }
-            catch (error) {
-                console.error(error);
-            }
-        };
-        //  récupérer l'URL d'image des films
-        const posterPath = computed(() => {
-            return "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
-        });
-        const bgPoster = computed(() => {
-          return  "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"
-        })
-        // obtenir les données du film et les stocker dans le detailMovie
-        onMounted(() => {
-            fetchDetailMovie();
-        });
-        return {
-            detailMovie,
-            posterPath,
-            bgPoster
-        };
-    },
-    components: { SimilarMovie, buttonTag }
-};
+          });
+          detailMovie.value = response;
+      }
+      catch (error) {
+          console.error(error);
+      }
+  };
 
+  //  récupérer l'URL d'image des films
+  const posterPath = moviePosterPath
+
+  // appelez la fonction fetchDetailMovie pour récupérer les données de chaque film au moment de la création du composant
+  onMounted(() => {
+      fetchDetailMovie();
+  });
 </script>
 
 
 <style lang="less" scoped>
-// .bgPoster {
-//   position:absolute;
-//   width: 100%;
-//   height: 100%;
-//   z-index: 2;
-
-// }
-.movie-info {
-  background: url("bgPoster + detailMovie.backdrop_path");
-}
 .infos {
   .star_vote, 
   .crown {
