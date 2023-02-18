@@ -1,3 +1,7 @@
+<script setup>
+import subscriptionData from '@/assets/data/subscription';
+</script>
+
 <template>
   <div class="subscriptionDetail">
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -21,16 +25,13 @@
               <button class="btn btn-primary" role="button">Select</button>
             </div>   
           </div>
-      </div>
+         </div>
        </template>
    
     </div>
   </div>
 </template>
 
-<script setup>
-import subscriptionData from '@/assets/data/subscription';
-</script>
 
 <style lang="less" scoped>
 </style>

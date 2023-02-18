@@ -1,5 +1,9 @@
+<script setup>
+</script>
+
 <template>
   <div class="button-tag">
+    <!-- groupe de bouton qui vont afficher sur le détail du film/tv -->
     <div class="fonction-group">
           <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
           <label class="btn function-btn btn-outline-primary" for="btnradio1">Play</label>
@@ -15,10 +19,6 @@
         </div>
   </div>
 </template>
-
-<script setup>
-
-</script>
 
 <style lang="less" scoped>
   .function-btn {

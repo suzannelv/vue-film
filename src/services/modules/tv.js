@@ -8,6 +8,13 @@ export function getPopularTv(currentPage) {
   })
 }
 
+// effectuer une requête HTTP GET à l'API pour récupérer les infos sur les tv similaires. 
+export function getSimilarTv(tvId) {
+  return ffRequest.get({
+    url:`tv/${tvId}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
+  })
+}
+
 // effectuer une requête HTTP GET à l'API pour récupérer les infos sur les tvs récentes. 
 export function getLatestTv(currentPageLatest) {
   return ffRequest.get({

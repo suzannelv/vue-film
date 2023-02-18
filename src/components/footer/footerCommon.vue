@@ -1,3 +1,6 @@
+<script setup>
+</script>
+
 <template>
   <div class="footer">
     <div class="container d-flex justify-content-between align-items-center py-3 my-4 border-top">
@@ -17,9 +20,6 @@
   </div>
 </template>
 
-<script setup>
-
-</script>
 
 <style lang="less" scoped>
 </style>

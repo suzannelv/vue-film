@@ -1,123 +1,144 @@
-<template>
-  <div class="nowmovie">
-    <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" v-for="movie in nowMovie.results">
-          <img :src="posterPath + movie.poster_path" alt="movies right now">
-          <div class="container">
-            <div class="carousel-caption text-start">
-              <h1>Example headline.</h1>
-              <p>Some representative placeholder content for the first slide of the carousel.</p>
-              <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div> -->
+<script setup>
 
-    <div id="carouselExampleCaptions" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active" v-for="movie in nowMovie.results">
-      <img :src="posterPath + movie.poster_path" alt="movies right now">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-  </div> 
-
-<div class="diviser-line mx-auto"></div>
-<popularMovies/>
-
-<div class="diviser-line mx-auto"></div>
-<topMovies/>
-
-<div class="diviser-line mx-auto"></div>
-<comingMovies/>
-
-</template>
-
-<script>
-import tmdb from '@/services/tmdb';
 import popularMovies from '../home/cpns/popularMovies.vue';
 import topMovies from './cpns/topMovies.vue';
 import comingMovies from './cpns/comingMovies.vue'
-import { useRoute} from 'vue-router';
-import { ref, computed, onMounted } from 'vue';
-
-
-
-
-export default {
-    setup() {
-        // Obtenir l'identité de chaque film
-        const route = useRoute();
-        const movieId = route.params.id;
-        // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const nowMovie = ref({});
-        // récupérer les données de chaque film selon leur id
-        const fetchNowMovie = async () => {
-            try {
-                const response = await tmdb.get("movie/now_playing?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1");
-                nowMovie.value = response.data;
-        
-            }
-            catch (error) {
-                console.error(error);
-            }
-        };
-        //  récupérer l'URL d'image des films
-        const posterPath = computed(() => {
-            return "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
-        });
-        // obtenir les données du film et les stocker dans le nowMovie
-        onMounted(() => {
-            fetchNowMovie();
-        });
-        return {
-            nowMovie,
-            posterPath,
-        };
-    },
-    components: { popularMovies, topMovies, comingMovies }
-};
 
 </script>
 
+<template>
+  <!-- carousel sur les fils en cours -->
+   <div class="banner">
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- première banner de carousel -->
+        <div class="carousel-item active" data-bs-interval="5000">
+          <!-- image -->
+          <img src="@/assets/img/banner/banner_movie1.jpg" class="d-block w-100" alt="Ant-Man and the Wasp: Quantumania">
+          <div class="banner-text d-none d-md-block position-absolute top-50 ms-5">
+            <!-- titre -->
+              <h2 class="fw-bold text-light">Ant-Man and the Wasp: Quantumania</h2>
+              <div class="btn-group btn-group-sm " role="group" aria-label="Small button group">
+                <!-- infos brève du film -->
+                <button type="button" class="btn text-light btn-top">TOP1</button>
+                <button type="button" class="btn text-light btn-date">2023</button>
+                <button type="button" class="btn text-light btn-limiteAge">12+</button>
+              </div>
+              <!-- description briève du film -->
+              <div class="description">
+                <p class="text-light">Super-Hero partners Scott Lang and Hope van Dyne, along with with Hope's parents Janet van Dyne and Hank Pym, and Scott's daughter Cassie Lang, find themselves exploring the Quantum Realm, interacting with strange new creatures and embarking on an adventure that will push them beyond the limits of what they thought possible.</p>
+              </div>
+          </div>
+        </div>
+        <!-- deuxième banner de carousel -->
+        <div class="carousel-item">
+          <img src="@/assets/img/banner/banner_movie2.jpg" class="d-block w-100" alt="Black Panther: Wakanda Forever">
+          <div class="banner-text d-none d-md-block position-absolute top-50 ms-5">
+              <h2 class="text-light fw-bold">Black Panther: Wakanda Forever</h2>
+              <div class="btn-group btn-group-sm " role="group" aria-label="Small button group">
+                <button type="button" class="btn text-light btn-top">TOP2</button>
+                <button type="button" class="btn text-light btn-date">2023</button>
+              </div>
+              <div class="description">
+                <p class="text-light">Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.</p>
+              </div>
+           </div>
+        </div>
+        <!-- trosième banner de carousel -->
+        <div class="carousel-item">
+          <img src="@/assets/img/banner/banner_movie3.jpg" class="d-block w-100" alt="Inspector Sun and the Curse of the Black Widow">
+          <div class="banner-text d-none d-md-block position-absolute top-50 ms-5">
+              <h2 class="text-light fw-bold">Inspector Sun and the Curse of the Black Widow</h2>
+              <div class="btn-group btn-group-sm " role="group" aria-label="Small button group">
+                <button type="button" class="btn text-light btn-top">TOP7</button>
+                <button type="button" class="btn text-light btn-date">2022</button>
+              </div>
+              <div class="description">
+                <p class="text-light">Shanghai, 1934. In an insect world parallel to that of humans, veteran Inspector Sun, a lone spider, leads his last mission against his archenemy the Red Locust, before embarking on a well-deserved retirement. His vacation aboard a Pan Am clipper between Shanghai and San Francisco comes to an abrupt end when millionaire Dr. Spindelthorp is found murdered. What begins as a routine case for Sun will ultimately decide the fate of humanity.</p>
+              </div>
+           </div>
+        </div>
+      </div> 
+        <!--  bouton pour retourner la slide précédente -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <!-- bouton pour aller à la slide suivante -->
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div> 
+  </div>
+
+    <div class="diviser-line mx-auto"></div>
+    <popularMovies/>
+
+    <div class="diviser-line mx-auto"></div>
+    <topMovies/>
+
+    <div class="diviser-line mx-auto"></div>
+    <comingMovies/>
+
+</template>
 
 <style lang="less" scoped>
 
-img {
-  width: 100%;
-  height: 1000px;
-  object-fit:cover;
+.banner {
+  .carousel-item {
+    position:relative;
+    // le filtre de luminosité est appliqué à l'image pour la rendre plus sombre
+    img {
+      filter:brightness(0.7);
+    }
+
+    .banner-text {
+     padding-left:200px;
+    }
+    // des pseudo-éléments qui sont ajoutés avant et après chaque élément avec la classe "carousel-item". 
+    .carousel-item::before,
+    .carousel-item::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      // Un fond linéaire avec un dégradé de noir semi-transparent est appliqué à ces éléments pour donner l'effet de fondu.
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.6), transparent);
+    }
+  .carousel-item::after{
+    right:0;
+    left: auto;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.6), transparent);
+  }
+
+  .btn-top {
+    background-color: rgb(84, 222, 72);
+  }
+
+  .btn-date, 
+  .btn-limiteAge {
+    background-color: rgb(168, 170, 173);
+
+  }
+
+  .description {
+    width: 400px;
+    height: 300px;
+
+// limiter la hauteur de l'élément <p> et d'empêcher le texte de dépasser.
+    p{
+      overflow:hidden; 
+      text-overflow:ellipsis;
+      // utiliser les propriétés de boîte WebKit pour contrôler la hauteur de l'élément.
+      display:-webkit-box; 
+      -webkit-box-orient:vertical;
+      // seul le texte des deux premières lignes sera visible, le reste sera remplacé par des ellipses.
+      -webkit-line-clamp:2; 
+    }
+  }
+  }
+
 }
 </style>

@@ -1,29 +1,3 @@
-<template>
-  <div class="pTv container-fluid">
-    <div class="row">
-      <template v-for="tv in popularTv" :key="tv.id">
-        <div class="col my-4" @click="itemClick(tv.id)">
-          <div class="card" style="width: 18rem;">
-            <img :src="posterPath + tv.poster_path" class="card-img-top" alt="tv-poster">
-            <div class="card-body reset-size">
-              <h5 class="card-title">{{tv.name}} 
-                <small class="text-secondary fs-6" v-if="tv.first_air_date">({{ tv.first_air_date}})</small>
-              </h5> 
-              <p class="card-text">
-                <van-rate :model-value ="tv.vote_average" allow-half readonly color="#f4f431"/>
-                <!-- {{ tv.vote_average }}  -->
-                <fa icon="thumbs-up" class="thumbs-up ms-2"/>
-              </p>
-               <button class="btn btn-secondary position-absolute bottom-0 mb-3">Learn more</button> 
-            </div>
-          </div>
-        </div>
-      </template>
-    </div>
-    
-  </div>
-</template>
-
 <script setup>
 
 import {tvPosterPath} from '@/services/request/config'
@@ -52,17 +26,62 @@ const router = useRouter()
   const itemClick = (id) => {
     router.push("/detailtv/" + id)
   }
+  // la méthode getMoreTv pour afficher la page suivante
+  const getMoreTv = () => {
+    pTvStore.fetchPopularTv()
+  }
 
 </script>
+
+<template>
+  <div class="pTv container-fluid">
+    <div class="row">
+      <!--parcourir le tableau de tv popularTv et crée une carte pour chaque tv. La propriété :key est utilisée pour aider à identifier chaque élément dans la liste.  -->
+      <template v-for="tv in popularTv" :key="tv.id">
+        <div class="col my-4" @click="itemClick(tv.id)">
+          <div class="card" style="width: 18rem;">
+            <!-- image de l'affiche de la tv -->
+            <img :src="posterPath + tv.poster_path" class="card-img-top" alt="tv-poster">
+            <div class="card-body reset-size">
+              <!-- titre -->
+              <h5 class="card-title">{{tv.name}} 
+                <!-- date de sortie -->
+                <small class="text-secondary fs-6" v-if="tv.first_air_date">({{ tv.first_air_date}})</small>
+              </h5> 
+              <!-- note de tv -->
+              <p class="card-text">
+                <van-rate :model-value ="tv.vote_average" allow-half readonly color="#f4f431"/>
+                <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+              </p>
+               <button class="btn btn-secondary position-absolute bottom-0 mb-3">Learn more</button> 
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+ <!--  utiliser 'van-divider' pour ajouter une ligne de séparation horizontale -->
+  <van-divider
+  :style="{ color: '#1989fa', borderColor: '#d5e2ed', padding: '0 16px' }">
+    <!-- cliquer le bouton pour afficher plus de tvs -->
+    <button class="btn round-5 text-light loadBtn" @click="getMoreTv">Load More</button>
+  </van-divider>
+</template>
+
+
 
 <style lang="less" scoped>
 .reset-size {
   width: 286px;
-  height: 150px;
+  height: 180px;
 }
 .thumbs-up {
   color:var(--primary-color);
  
+}
+.loadBtn {
+  background-color: rgb(152, 190, 192);
 }
 
 </style>

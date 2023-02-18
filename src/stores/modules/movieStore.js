@@ -1,4 +1,4 @@
-import { getPopularMovies, getComingMovies, getTopMovies } from "@/services";
+import { getPopularMovies, getComingMovies, getNowMovies, getTopMovies, getSimilarMovies } from "@/services";
 import { defineStore } from "pinia";
 
 // définir un store appelé 'useMoviesStores' 
@@ -7,6 +7,8 @@ const useMoviesStore = defineStore("movies", {
     // propriété ‘popularMovies’ initialisée à un objet vide
     popularMovies: [],
     currentPage: 1,
+    similarMovies: [],
+    nowMovies: [],
     comingMovies: [],
     currentPageComing: 1,
     topMovies: [],
@@ -20,6 +22,12 @@ const useMoviesStore = defineStore("movies", {
       this.popularMovies.push(...res.results)
           // la propriété "currentPage" est incrémentée pour récupérer la page suivante lors de l'appel suivant à cette action.
       this.currentPage++
+    }, 
+      // récupère les films similaires en appelant la fonction "getSimilarMovies" à partir du module "services"
+    async fetchSimilarMovies(movieId) {
+      const res = await getSimilarMovies(movieId)
+      this.similarMovies=res.results
+        
     }, 
 
      // récupère les films à venir en appelant la fonction "getComingMovies" à partir du module "services"

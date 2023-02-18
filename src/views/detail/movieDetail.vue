@@ -1,47 +1,3 @@
-<template>
-  <div class="detail container-fluid my-5">
-    <div class="row movie-info d-flex align-items-center ">
-      <div class="col offset-md-1 poster text-center">
-        <img :src="posterPath + detailMovie.poster_path" alt="`${detailMovie.title}` poster">
-      </div>
-      <div class="col infos">
-        <h1>{{ detailMovie.title }}</h1>
-        <!-- type du film -->
-        <div v-if="detailMovie
-        .genres">
-        {{ detailMovie.genres.slice(0, 3).map(genre => genre.name).join(' &#8226 ') }}
-      </div>
-        <div class="movie_info ms-3">
-            <span class="star_vote"><fa icon="star" class="star_vote me-1"/>{{ detailMovie.vote_average }}</span> | 
-            <span>{{ detailMovie.original_language }}</span> |
-            <span>{{ detailMovie.release_date }}</span> |
-            <span>{{ detailMovie.runtime }}min</span>
-            <div v-if="detailMovie.production_companies" class="my-3 fw-bolder">
-              {{detailMovie.production_companies.map(company => company.name).join(',') }}
-            </div>
-        </div>
-        <div class="join my-3">
-          <router-link :to="'/subscription'">
-            <button class="btn btn-secondary"><fa icon="crown" class="crown me-2"/>Join VIP to enjoin fantasy content!</button>
-          </router-link>
-        </div>
-
-        <div class="description my-3">
-          <p> 
-            <span class="text-secondary fw-">Description:</span> {{ detailMovie.overview }}
-          </p>
-        </div>
-
-        <!-- fonctions butons -->
-        <buttonTag/>
-      </div>
-    </div>
-  </div>
-
-  <!-- films similaires-->
-       <SimilarMovie/>
-</template>
-
 <script setup>
 
 import ffRequest from '@/services/request/index'
@@ -86,18 +42,67 @@ import { ref, onMounted } from 'vue';
 </script>
 
 
+<template>
+  <div class="detail container-fluid my-5">
+    <div class="row movie-info d-flex align-items-center ">
+      <div class="col offset-md-1 poster text-center">
+        <!-- affiche du film -->
+        <img :src="posterPath + detailMovie.poster_path" alt="`${detailMovie.title}` poster">
+      </div>
+      <div class="col infos">
+        <h1>{{ detailMovie.title }}</h1>
+        <!-- type du film -->
+        <div v-if="detailMovie
+           .genres">
+           {{ detailMovie.genres.slice(0, 3).map(genre => genre.name).join(' &#8226 ') }}
+        </div>
+        <div class="movie_info ms-3">
+          <!-- afficher la note moyenne d'un film sur une échelle de 0 à 10 avec une icône d'étoile avant le nombre. -->
+          <!--  
+            Utiliser un opérateur ternaire pour vérifier si la note moyenne existe (si elle n'est pas null ou undefined)
+            Si la note moyenne existe, cette expression utilise la méthode toFixed() pour arrondir la note moyenne à un chiffre après la virgule. 
+            Si la note moyenne n'existe pas (si elle est null ou undefined), cette expression affiche simplement 'N/A'.
+           -->
+            <span class="star_vote"><fa icon="star" class="star_vote me-1"/>{{ detailMovie.vote_average ? detailMovie.vote_average.toFixed(1) : 'N/A' }}</span> | 
+            <span>{{ detailMovie.original_language }}</span> |
+            <span>{{ detailMovie.release_date }}</span> |
+            <span>{{ detailMovie.runtime }}min</span>
+            <!-- nom de toutes les compagnies de production associées à un film -->
+            <div v-if="detailMovie.production_companies" class="my-3 fw-bolder">
+              {{detailMovie.production_companies.map(company => company.name).join(',') }}
+            </div>
+        </div>
+        
+        <!-- cliquer le bouton pour sauter à la page d'abonnement -->
+        <div class="join my-3">
+          <router-link :to="'/subscription'">
+            <button class="btn btn-secondary"><fa icon="crown" class="crown me-2"/>Join VIP to enjoin fantasy content!</button>
+          </router-link>
+        </div>
+        <!-- description du film -->
+        <div class="description my-3">
+          <p> 
+            <span class="text-secondary fw-">Description:</span> {{ detailMovie.overview }}
+          </p>
+        </div>
+
+        <!-- fonctions butons -->
+        <buttonTag/>
+      </div>
+    </div>
+  </div>
+
+  <!-- films similaires-->
+       <SimilarMovie/>
+</template>
+
+
+
 <style lang="less" scoped>
 .infos {
   .star_vote, 
   .crown {
     color: rgb(239, 223, 81);
-  }
-
-  .function-group {
-    .function-btn {
-    margin-right: 10px;
-  
-    }
   }
 }
 </style>

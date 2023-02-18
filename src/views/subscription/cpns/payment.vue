@@ -1,3 +1,7 @@
+<script setup>
+
+</script>
+
 <template>
   <div class="payment">
     <div class="row g-5">
@@ -108,9 +112,7 @@
   </div>
 </template>
 
-<script setup>
 
-</script>
 
 <style lang="less" scoped>
 </style>

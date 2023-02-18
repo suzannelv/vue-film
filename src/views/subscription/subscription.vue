@@ -1,3 +1,9 @@
+
+<script setup>
+import subscriptionDetail from './cpns/subscriptionDetail.vue'
+import payment from './cpns/payment.vue';
+</script>
+
 <template>
   <div class="subscription">
     <div class="container py-3">
@@ -17,8 +23,6 @@
 
         <!-- paiement -->
         <payment/>
-
-   
       </main>
 
  
@@ -26,10 +30,6 @@
   </div>
 </template>
 
-<script setup>
-import subscriptionDetail from './cpns/subscriptionDetail.vue'
-import payment from './cpns/payment.vue';
-</script>
 
 <style lang="less" scoped>
 .check-color {
@@ -39,6 +39,5 @@ import payment from './cpns/payment.vue';
 .active {
   border: 3px solid skyblue;
 }
-
 
 </style>

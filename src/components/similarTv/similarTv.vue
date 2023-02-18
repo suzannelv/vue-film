@@ -1,18 +1,45 @@
+<script setup>
+
+import {tvPosterPath} from '@/services/request/config'
+import useTvStore from '@/stores/modules/tvStore';
+import { storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+
+// crée une variable "tvId" qui contient l'ID du film récupéré à partir des paramètres de la route.
+const tvId = route.params.id;
+
+// la fonction useTvStore() pour instancier le magasin "similar tv". 
+const similarTvStore = useTvStore()
+
+// on appele la méthode fetchSimilarTv() pour récupérer les données sur les tv similaires.
+similarTvStore.fetchSimilarTv(tvId)
+
+// la fonction storeToRefs() pour transformer la propriété « similarTv » de l'état du magasin en un objet réactif. 
+const {similarTv} = storeToRefs(similarTvStore)
+
+const posterPath = tvPosterPath
+
+</script>
+
+
 <template>
   <div class="container-fluid similar-tv text-center">
     <span class="diviser-line d-inline-block mb-4"></span>
     <h2>Recommendations for You</h2>
     <div class="row my-5">
        <div class="col d-flex flex-wrap">
-         <template v-for="tv in similarTvs.results" :key="tv.id">
-          <div class="tv-card">
-            <div class="poster" v-if="tv.poster_path">
+         <template v-for="tv in similarTv" :key="tv.id">
+          <div class="tv-card" v-if="tv.poster_path">
+            <div class="poster" >
                 <img :src="posterPath + tv.poster_path" alt="poster">
             </div>
             <div class="text">
-              <h5>{{ tv.title }}</h5>  
+              <h5 v-if="tv.name">{{ tv.name }}</h5>  
               <small class="text-secondary" v-if="tv.release_date">({{ tv.release_date }})</small>
-              <p>Popularity: {{tv.popularity }}</p>
+              <!--  afficher la popularité avec seulement un chiffre après la virgule -->
+              <p v-if="tv.popularity">Popularity: {{tv.popularity.toFixed(1) }}</p>
             </div>
           </div>    
         </template>
@@ -21,48 +48,7 @@
   </div>
 </template>
 
-<script>
-import tmdb from '@/services/tmdb';
-import { useRoute } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
 
-export default {
-    setup() {
-        // Obtenir l'identité de chaque film
-        const route = useRoute();
-        const tvId = route.params.id;
-        // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
-        const similarTvs = ref({});
-
-        // récupérer les données de chaque film selon leur id
-        const fetchSimilarTv = async () => {
-            try {
-                const response = await tmdb.get(`tv/${tvId}/recommendations?api_key=1178ff8918bc325e7a4879abff99f3b7&language=en-US&page=1`);
-                similarTvs.value = response.data;
-            }
-            catch (error) {
-                console.error(error);
-            }
-        };
-        //  récupérer l'URL d'image des films
-        const posterPath = computed(() => {
-            return "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
-        });
-     
-     
-        onMounted(() => {
-          fetchSimilarTv();
-        });
-        return {
-          similarTvs,
-          posterPath,
-  
-        };
-    },
-  
-};
-
-</script>
 
 <style lang="less" scoped>
 

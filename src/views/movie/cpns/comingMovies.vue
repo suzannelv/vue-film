@@ -1,32 +1,3 @@
-<template> 
-  <div class="container coming-movie text-center">
-    <span class="diviser-line d-inline-block mb-4"></span>
-    <h2>Coming Soon</h2>
-    <div class="row my-5">
-       <div class="col d-flex flex-wrap">
-         <template v-for="movie in comingMovies" :key="movie.id">
-          <div class="movie-card" @click="itemClick(movie.id)" >
-            <div class="poster" v-if="movie.poster_path">
-              <img :src="posterPath + movie.poster_path" alt="poster">
-            </div>
-              <!-- pour le films manque key:poster_path,nous avons ajouté d'une façon locale -->
-              <div v-else>
-                <img src="@/assets/img/poster_path/the-well.jpg" alt="The Well">
-              </div>
-              <div class="text">
-                <h5>{{ movie.title }}</h5>  
-                <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
-                <p>Popularity: {{ movie.popularity }}</p>
-              </div>
-          </div>      
-        </template>
-      </div>
-    </div>
-
-    <button @click="more">more</button>
-  </div>
-</template>
-
 <script setup>
 
 import { moviePosterPath } from '@/services/request/config';
@@ -51,14 +22,55 @@ const itemClick = (id) => {
   router.push("/detail/" + id)
 }
 
-const more = () => {
+const getMoreMovies = () => {
   comingMoviesStore.fetchComingMovies()
 }
 
 </script>
 
-<style lang="less" scoped>
+<template> 
+  <div class="container coming-movie text-center">
+    <span class="diviser-line d-inline-block mb-4"></span>
+    <h2>Coming Soon</h2>
+    <div class="row my-5">
+       <div class="col d-flex flex-wrap">
+         <!--parcourir le tableau de films à venir et crée une carte pour chaque film. La propriété :key est utilisée pour aider à identifier chaque élément dans la liste.  -->
+         <template v-for="movie in comingMovies" :key="movie.id">
+          <div class="movie-card" @click="itemClick(movie.id)" >
+            <div class="poster" v-if="movie.poster_path">
+            <!-- image de l'affiche du film -->
+              <img :src="posterPath + movie.poster_path" alt="poster">
+            </div>
+              <!-- pour le films manque key:poster_path,nous avons ajouté d'une façon locale -->
+              <div v-else>
+                <img src="@/assets/img/poster_path/the-well.jpg" alt="The Well">
+              </div>
+              <!-- les infos brèves sur chaque film -->
+              <div class="text">
+                <!-- titre -->
+                <h5>{{ movie.title }}</h5>  
+                <!-- date de sortie -->
+                <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
+                <!-- popularité -->
+                <p>Popularity: {{ movie.popularity }}</p>
+              </div>
+          </div>      
+        </template>
+      </div>
+    </div>
+    
+     <!--  utiliser 'van-divider' pour ajouter une ligne de séparation horizontale -->
+    <van-divider
+      :style="{ color: '#1989fa', borderColor: '#d5e2ed', padding: '0 16px' }">
+    <!-- cliquer le bouton pour afficher plus de films -->
+      <button class="btn round-5 text-light loadBtn" @click="getMoreMovies">Load More</button>
+    </van-divider>
+  </div>
+</template>
 
+
+
+<style lang="less" scoped>
 .movie-card {
   width: 220px;
   height: 500px;
@@ -67,6 +79,10 @@ const more = () => {
   height: 350px;
   object-fit: cover;
 }
+}
+
+.loadBtn {
+  background-color: rgb(152, 190, 192);
 }
 
 
