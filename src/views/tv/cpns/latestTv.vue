@@ -47,7 +47,10 @@ const getMoreTv = () => {
                 <!-- date de sortie -->
                 <small class="text-secondary" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
                 <!-- popularité -->
-                <p>Popularity: {{ tv.popularity }}</p>
+                <p>
+                  <van-rate :model-value ="movie.popularity" allow-half readonly color="#f4f431"/>
+                  <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+                </p>
               </div>
           </div>
                
@@ -75,6 +78,9 @@ const getMoreTv = () => {
   height: 350px;
   object-fit: cover;
 }
+}
+.thumbs-up {
+  color:var(--primary-color);
 }
 .loadBtn {
   background-color: rgb(152, 190, 192);

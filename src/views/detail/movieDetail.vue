@@ -54,6 +54,9 @@ import { ref, onMounted } from 'vue';
         <!-- type du film -->
         <div v-if="detailMovie
            .genres">
+           <!-- Le filtre slice(0, 3) est utilisé pour limiter la liste des genres à 3 éléments au maximum. 
+           map() est utilisé pour extraire le nom de chaque genre à partir de l'objet genre dans le tableau genres. 
+           join(' &#8226 ') est utilisé pour joindre les noms de genre avec un symbole de point central. -->
            {{ detailMovie.genres.slice(0, 3).map(genre => genre.name).join(' &#8226 ') }}
         </div>
         <div class="movie_info ms-3">

@@ -3,6 +3,7 @@
 import popularMovies from '../home/cpns/popularMovies.vue';
 import topMovies from './cpns/topMovies.vue';
 import comingMovies from './cpns/comingMovies.vue'
+import backUp from '@/components/back-up/backUp.vue';
 
 </script>
 
@@ -71,7 +72,8 @@ import comingMovies from './cpns/comingMovies.vue'
       </button>
     </div> 
   </div>
-
+    
+    <backUp/>
     <div class="diviser-line mx-auto"></div>
     <popularMovies/>
 

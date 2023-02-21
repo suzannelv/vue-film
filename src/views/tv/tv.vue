@@ -2,6 +2,8 @@
 import popularTv from '../home/cpns/popularTv.vue';
 import topTv from '../tv/cpns/topTv.vue';
 import latestTv from './cpns/latestTv.vue';
+import backUp from '@/components/back-up/backUp.vue';
+
 </script>
 
 <template>
@@ -69,8 +71,7 @@ import latestTv from './cpns/latestTv.vue';
       </button>
     </div> 
   </div>
-
-  
+  <backUp/>
   <div class="diviser-line mx-auto"></div>
   <popularTv/>
 

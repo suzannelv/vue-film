@@ -56,7 +56,10 @@ const getMoreMovies = () => {
                 <!-- date de sortie -->
                 <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
                 <!-- popularité -->
-                <p>Popularity: {{ movie.popularity }}</p>
+                <p>
+                  <van-rate :model-value ="movie.popularity" allow-half readonly color="#f4f431"/>
+                  <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+                </p>
               </div>
           </div>        
         </template>
@@ -82,6 +85,9 @@ const getMoreMovies = () => {
   height: 350px;
   object-fit: cover;
 }
+}
+.thumbs-up {
+  color:var(--primary-color);
 }
 .loadBtn {
   background-color: rgb(152, 190, 192);

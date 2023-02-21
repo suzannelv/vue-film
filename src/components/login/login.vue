@@ -118,7 +118,6 @@ watch([uname, upwd], () => {
 
      // définir le style
       background-color: #00000098;
-      box-shadow: 5px 10px #161616a8;
 
      //  définir le style de titre
      .gradient-title {

@@ -2,6 +2,8 @@
 :root {
   --primary-color:#9ae4e6;
   --van-notice-bar-background: #fff !important;
+  --van-back-top-background: var(--primary-color)!important;
+
 
 
 }

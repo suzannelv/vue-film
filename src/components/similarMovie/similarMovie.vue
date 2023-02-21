@@ -42,8 +42,11 @@ const posterPath = moviePosterPath
             <div class="text">
               <h5>{{ movie.title }}</h5>  
               <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
-              <!--  afficher la popularité avec seulement un chiffre après la virgule -->
-              <p>Popularity: {{ movie.popularity.toFixed(1) }}</p> 
+             <!-- note du film -->
+              <p>
+                <van-rate :model-value ="movie.vote_average" allow-half readonly color="#f4f431"/>
+                <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+              </p>
             </div>
           </div>     
         </template>
@@ -61,6 +64,9 @@ const posterPath = moviePosterPath
   width: 200px;
   height: 350px;
   object-fit: cover;
+}
+.thumbs-up {
+  color:var(--primary-color);
 }
 }
 

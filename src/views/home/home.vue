@@ -2,6 +2,7 @@
 import search from './cpns/search.vue';
 import popularMovies from './cpns/popularMovies.vue';
 import popularTv from './cpns/popularTv.vue';
+import backUp from '@/components/back-up/backUp.vue';
 </script>
 
 <template>
@@ -71,7 +72,7 @@ import popularTv from './cpns/popularTv.vue';
     </div> 
   </div>
 
-
+    <backUp/>
     <!--Section rechercher -->
     <div class="search">
       <search/>

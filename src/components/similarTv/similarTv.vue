@@ -38,8 +38,11 @@ const posterPath = tvPosterPath
             <div class="text">
               <h5 v-if="tv.name">{{ tv.name }}</h5>  
               <small class="text-secondary" v-if="tv.release_date">({{ tv.release_date }})</small>
-              <!--  afficher la popularité avec seulement un chiffre après la virgule -->
-              <p v-if="tv.popularity">Popularity: {{tv.popularity.toFixed(1) }}</p>
+              <!-- popularité de tv -->
+              <p>
+                <van-rate :model-value ="tv.popularity" allow-half readonly color="#f4f431"/>
+                <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+              </p>
             </div>
           </div>    
         </template>
@@ -59,6 +62,9 @@ const posterPath = tvPosterPath
   width: 200px;
   height: 350px;
   object-fit: cover;
+}
+.thumbs-up {
+  color:var(--primary-color);
 }
 }
 
