@@ -46,9 +46,6 @@ class ffRequest {
   return this.request({...config, method: "get"})
  }
 
-//  post(config) {
-//   return this.request({...config, method: "post"})
-//  }
 }
 
 export default new ffRequest(BASE_URL, API_KEY, TIMEOUT)

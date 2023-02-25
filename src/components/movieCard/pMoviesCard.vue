@@ -40,7 +40,7 @@ const router = useRouter()
       <!--parcourir le tableau de films popularMovies et crée une carte pour chaque film. La propriété :key est utilisée pour aider à identifier chaque élément dans la liste.  -->
       <template v-for="movie in popularMovies" :key="movie.id">
         <div class="col my-4" @click="itemClick(movie.id)">
-          <div class="card" style="width: 18rem;">
+          <div class="card mx-auto" style="width: 18rem;">
             <!-- image de l'affiche du film -->
             <img :src="posterPath + movie.poster_path" class="card-img-top" alt="movie-poster">
             <div class="card-body reset-size">

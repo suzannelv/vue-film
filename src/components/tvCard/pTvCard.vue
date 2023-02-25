@@ -39,7 +39,7 @@ const router = useRouter()
       <!--parcourir le tableau de tv popularTv et crée une carte pour chaque tv. La propriété :key est utilisée pour aider à identifier chaque élément dans la liste.  -->
       <template v-for="tv in popularTv" :key="tv.id">
         <div class="col my-4" @click="itemClick(tv.id)">
-          <div class="card" style="width: 18rem;">
+          <div class="card mx-auto" style="width: 18rem;">
             <!-- image de l'affiche de la tv -->
             <img :src="posterPath + tv.poster_path" class="card-img-top" alt="tv-poster">
             <div class="card-body reset-size">

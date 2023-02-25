@@ -5,7 +5,17 @@ import {useRouter} from 'vue-router';
 
 // Lorsque la fonction itemClick est appelée, elle utilise l'objet router pour naviguer vers la route associée à l'élément de navigation cliqué. 
 const router = useRouter()
+
 const itemClick = (item) => {
+  // Sélectionner la barre de navigation
+  const navbar = document.querySelector('.navbar-collapse') 
+  // Vérifier la largeur de l'écran (992px est la largeur du breakpoint dans Bootstrap)
+  if (window.innerWidth < 992) { 
+  
+  // Retirer la classe "show" pour masquer la barre de navigation 
+    navbar.classList.remove('show') 
+   
+  }
   // la méthode push de l'objet router avec l'URL de la route correspondante qui est stockée dans la propriété path de l'objet item.
   router.push(item.path)
    
@@ -30,7 +40,8 @@ const itemClick = (item) => {
       <!-- parcourir le tableau des éléments de navigation pour créer une répétition d'un bloc de code venant du navbarData  -->
         <div class="collapse navbar-collapse mx-5" id="navbarNav">
           <template v-for="item in navbarData" >
-            <ul class="navbar-nav me-5" @click="itemClick(item)">
+            <ul class="navbar-nav me-5" 
+                @click="itemClick(item)">
               <li class="nav-item" >
                 <a class="nav-link active text-light" aria-current="page" href="#">
                   {{ item.text }}

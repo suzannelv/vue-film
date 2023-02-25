@@ -1,4 +1,11 @@
 <script setup>
+import useLoadingStore from '@/stores/modules/loadingStore';
+import { ref } from 'vue';
+
+// Faire disparaître l'indicateur de chargement une fois que la redirection vers la page de souscription est réussie.
+const loadingStore = useLoadingStore()
+loadingStore.isLoading = ref(false)
+
 </script>
 
 <template>
@@ -12,15 +19,15 @@
         vertical
         class="notice-swipe"
         :autoplay="3000"
-        :touchable="false"
         :show-indicators="false" 
       >
          <van-swipe-item>Join VIP now for unlimited access!</van-swipe-item>
          <!-- cliquer pour renvoie à une page d'abonnement -->
          <a href="/subscription" class="text-decoration-none text-dark">
-            <van-swipe-item>Plans start et <span class="fw-bold">9.90 €</span>/month !
-            <van-icon name="fire" color="#ee0a24" />    
-            <van-icon name="arrow" class="ms-2" />
+            <van-swipe-item>
+              Plans start et <span class="fw-bold">9.90 €</span>/month !
+              <van-icon name="fire" color="#ee0a24" />    
+              <van-icon name="arrow" class="ms-2" />
             </van-swipe-item>
          </a> 
       </van-swipe>

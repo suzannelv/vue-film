@@ -41,10 +41,7 @@ const getMoreMovies = () => {
             <!-- image de l'affiche du film -->
               <img :src="posterPath + movie.poster_path" alt="poster">
             </div>
-              <!-- pour le films manque key:poster_path,nous avons ajouté d'une façon locale -->
-              <div v-else>
-                <img src="@/assets/img/poster_path/the-well.jpg" alt="The Well">
-              </div>
+             
               <!-- les infos brèves sur chaque film -->
               <div class="text">
                 <!-- titre -->

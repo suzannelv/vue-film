@@ -48,7 +48,7 @@ const getMoreTv = () => {
                 <small class="text-secondary" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
                 <!-- popularité -->
                 <p>
-                  <van-rate :model-value ="movie.popularity" allow-half readonly color="#f4f431"/>
+                  <van-rate :model-value ="tv.popularity" allow-half readonly color="#f4f431"/>
                   <fa icon="thumbs-up" class="thumbs-up ms-2"/>
                 </p>
               </div>

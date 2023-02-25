@@ -33,7 +33,7 @@ const posterPath = tvPosterPath
          <template v-for="tv in similarTv" :key="tv.id">
           <div class="tv-card" v-if="tv.poster_path">
             <div class="poster" >
-                <img :src="posterPath + tv.poster_path" alt="poster">
+              <img :src="posterPath + tv.poster_path" alt="poster">
             </div>
             <div class="text">
               <h5 v-if="tv.name">{{ tv.name }}</h5>  
