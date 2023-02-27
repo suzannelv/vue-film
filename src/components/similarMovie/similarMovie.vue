@@ -25,7 +25,7 @@ const posterPath = moviePosterPath
 </script>
 
 <template>
-  <div class="container-fluid similar-movie text-center">
+  <div class="container similar-movie text-center">
     <span class="diviser-line d-inline-block mb-4"></span>
     <h2>Similar Movies</h2>
     <div class="row my-5">
