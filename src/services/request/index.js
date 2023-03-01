@@ -8,6 +8,7 @@ const loadingStore = useLoadingStore()
 class ffRequest {
 
   constructor(baseURL, api, timeout){
+    // créer une instance
     this.instance = axios.create({
       baseURL,
       api,

@@ -30,33 +30,35 @@ const getMoreTv = () => {
 </script>
 
 <template> 
-  <div class="container top-movie text-center">
-    <span class="diviser-line d-inline-block mb-4"></span>
-    <h2>Top List</h2>
+  <div class="container-fluid top-movie">
+    <span class="diviser-line d-inline-block mb-4 text-center"></span>
+    <h2 class="text-center">Top List</h2>
     <div class="row my-5">
-       <div class="col d-flex flex-wrap">
+       
         <!-- parcourir les top tv -->
          <template v-for="tv in topTv" :key="tv.id">
-          <div class="tv-card"  @click="itemClick(tv.id)">
-            <div class="poster" v-if="tv.poster_path">
+          <div class="col my-4" @click="itemClick(tv.id)">
+            <div class="card tv-card mx-auto" style="width: 18rem;">
+              <div class="poster" v-if="tv.poster_path">
               <!-- affiche de tv -->
-                <img :src="posterPath + tv.poster_path" alt="poster">
+                <img :src="posterPath + tv.poster_path" class="card-img-top" alt="poster">
               </div>
-              <div class="text">
+              <div class="text card-body reset-size">
                 <!-- titre -->
-                <h5>{{ tv.name }}</h5>  
+                <h5 class="card-title">{{ tv.name }}</h5>  
                 <!-- date de sortie -->
-                <small class="text-secondary" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
+                <small class="text-secondary fs-6" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
                 <!-- popularité -->
                 <p>
                   <van-rate :model-value ="tv.popularity" allow-half readonly color="#f4f431"/>
                   <fa icon="thumbs-up" class="thumbs-up ms-2"/>
                 </p>
+                <button class="btn btn-secondary position-absolute bottom-0 mb-3">Learn more</button> 
               </div>
-          </div>
-               
+            </div>
+          </div>    
         </template>
-      </div>
+    
     </div>
   </div>
 
@@ -73,12 +75,9 @@ const getMoreTv = () => {
 <style lang="less" scoped>
 
 .tv-card {
-  width: 220px;
-  height: 500px;
-  img {
-  width: 200px;
-  height: 350px;
-  object-fit: cover;
+  .reset-size {
+  width: 286px;
+  height: 180px;
 }
 .thumbs-up {
   color:var(--primary-color);

@@ -21,6 +21,7 @@ const {similarTv} = storeToRefs(similarTvStore)
 
 const posterPath = tvPosterPath
 
+
 </script>
 
 
@@ -29,15 +30,20 @@ const posterPath = tvPosterPath
     <span class="diviser-line d-inline-block mb-4"></span>
     <h2>Recommendations for You</h2>
     <div class="row my-5">
-       <div class="col d-flex flex-wrap">
+       <div class="col d-flex flex-wrap" >
+        <!--  crée un modèle de répétition (v-for) sur le tableau "similarTv" et créer un élément pour chaque objet "tv". La clé ":key" est utilisée pour améliorer la performance de la répétition en identifiant chaque élément avec une clé unique. -->
          <template v-for="tv in similarTv" :key="tv.id">
           <div class="tv-card" v-if="tv.poster_path">
+            <!-- poster -->
             <div class="poster" >
               <img :src="posterPath + tv.poster_path" alt="poster">
             </div>
+            <!-- info sur tv -->
             <div class="text">
+              <!-- titre -->
               <h5 v-if="tv.name">{{ tv.name }}</h5>  
-              <small class="text-secondary" v-if="tv.release_date">({{ tv.release_date }})</small>
+              <!-- date de sortie -->
+              <small class="text-secondary" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
               <!-- popularité de tv -->
               <p>
                 <van-rate :model-value ="tv.popularity" allow-half readonly color="#f4f431"/>

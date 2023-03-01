@@ -22,17 +22,18 @@ const {similarMovies} = storeToRefs( similarMovieStore)
 // crée une variable "posterPath" qui contient le chemin d'accès aux images de poster de film à partir de la variable "moviePosterPath" du module de configuration de la requête.
 const posterPath = moviePosterPath
 
+
 </script>
 
 <template>
-  <div class="container similar-movie text-center">
+  <div class="container-fluid similar-movie text-center">
     <span class="diviser-line d-inline-block mb-4"></span>
     <h2>Similar Movies</h2>
-    <div class="row my-5">
-       <div class="col d-flex flex-wrap">
+    <div class="row my-5 ">
+      <div class="col d-flex flex-wrap">
         <!--  crée un modèle de répétition (v-for) sur le tableau "similarMovies" et créer un élément pour chaque objet "movie". La clé ":key" est utilisée pour améliorer la performance de la répétition en identifiant chaque élément avec une clé unique. -->
          <template v-for="movie in similarMovies" :key="movie.id">
-          <!-- les infos du films -->
+            <!-- les infos du films -->
           <div class="movie-card" v-if="movie.poster_path">
             <!-- image du poster -->
             <div class="poster" >
@@ -40,7 +41,7 @@ const posterPath = moviePosterPath
             </div>
             <!-- un élément qui contient le titre, la date de sorie et la popularité du film -->
             <div class="text">
-              <h5>{{ movie.title }}</h5>  
+              <h5 v-if="movie.title">{{ movie.title }}</h5>  
               <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
              <!-- note du film -->
               <p>
@@ -48,9 +49,9 @@ const posterPath = moviePosterPath
                 <fa icon="thumbs-up" class="thumbs-up ms-2"/>
               </p>
             </div>
-          </div>     
+          </div>   
         </template>
-      </div>
+      </div> 
     </div>
   </div>
 </template>

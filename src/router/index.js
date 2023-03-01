@@ -57,7 +57,7 @@ const router = createRouter({
       path:"/detailtv/:id",
       component: () => import("@/views/detail/tvDetail.vue")
     },     
-   
+  
   ]
 })
 

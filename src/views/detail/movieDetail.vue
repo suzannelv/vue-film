@@ -8,14 +8,15 @@ import { useRoute} from 'vue-router';
 import { ref, onMounted } from 'vue';
 
 
-  // Obtenir l'identité de chaque film
+// récupèrent l'ID du film à partir de l'objet de route en utilisant useRoute() de Vue Router.
   const route = useRoute();
+  // récupérer la valeur de l'ID du film dans l'URL de la page actuelle
   const movieId = route.params.id;
 
-  // définir une référence appelée detailMovie qui est un objet vide {} pour surveiller les changements dans le modèle de vue.
+  // définir une référence appelée detailMovie qui est un objet vide pour stocker les détail du film récupérés ) partir de l'API 
   const detailMovie = ref({});
 
-  // récupérer les données de chaque film selon leur id
+  // récupérer les données de chaque film selon leur ID
   const fetchDetailMovie = async () => {
       try {
           const response = await ffRequest.get({
@@ -32,10 +33,10 @@ import { ref, onMounted } from 'vue';
       }
   };
 
-  //  récupérer l'URL d'image des films
+  // récupérer l'URL d'image des films
   const posterPath = moviePosterPath
 
-  // appelez la fonction fetchDetailMovie pour récupérer les données de chaque film au moment de la création du composant
+  // appeler la fonction fetchDetailMovie une fois que le composant a été monté
   onMounted(() => {
       fetchDetailMovie();
   });

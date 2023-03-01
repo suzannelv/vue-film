@@ -29,35 +29,37 @@ const getMoreMovies = () => {
 </script>
 
 <template> 
-  <div class="container coming-movie text-center">
-    <span class="diviser-line d-inline-block mb-4"></span>
-    <h2>Coming Soon</h2>
-    <div class="row my-5">
-       <div class="col d-flex flex-wrap">
+  <div class="container-fluid coming-movie">
+    <span class="diviser-line d-inline-block mb-4 text-center"></span>
+    <h2 class="text-center">Coming Soon</h2>
+    <div class="row">
+       
          <!--parcourir le tableau de films à venir et crée une carte pour chaque film. La propriété :key est utilisée pour aider à identifier chaque élément dans la liste.  -->
          <template v-for="movie in comingMovies" :key="movie.id">
-          <div class="movie-card" @click="itemClick(movie.id)" >
-            <div class="poster" v-if="movie.poster_path">
-            <!-- image de l'affiche du film -->
-              <img :src="posterPath + movie.poster_path" alt="poster">
-            </div>
-             
-              <!-- les infos brèves sur chaque film -->
-              <div class="text">
-                <!-- titre -->
-                <h5>{{ movie.title }}</h5>  
-                <!-- date de sortie -->
-                <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
-                <!-- popularité -->
-                <p>
-                  <van-rate :model-value ="movie.popularity" allow-half readonly color="#f4f431"/>
-                  <fa icon="thumbs-up" class="thumbs-up ms-2"/>
-                </p>
-                <!-- <p>Popularity: {{ movie.popularity }}</p> -->
-              </div>
-          </div>      
+          <div class="col my-4">
+            <div class="card movie-card mx-auto" style="width: 18rem;" @click="itemClick(movie.id)" >
+                <div class="poster" v-if="movie.poster_path">
+                <!-- image de l'affiche du film -->
+                  <img :src="posterPath + movie.poster_path" class="card-img-top" alt="poster">
+                </div>
+              
+                <!-- les infos brèves sur chaque film -->
+                <div class="text card-body reset-size">
+                  <!-- titre -->
+                  <h5 class="card-title">{{ movie.title }}</h5>  
+                  <!-- date de sortie -->
+                  <small class="text-secondary" v-if="movie.release_date">({{ movie.release_date }})</small>
+                  <!-- popularité -->
+                  <p>
+                    <van-rate :model-value ="movie.popularity" allow-half readonly color="#f4f431"/>
+                    <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+                  </p>
+                  <button class="btn btn-secondary position-absolute bottom-0 mb-3">Learn more</button>
+                </div>
+            </div>  
+          </div>     
         </template>
-      </div>
+     
     </div>
     
      <!--  utiliser 'van-divider' pour ajouter une ligne de séparation horizontale -->
@@ -73,12 +75,9 @@ const getMoreMovies = () => {
 
 <style lang="less" scoped>
 .movie-card {
-  width: 220px;
-  height: 500px;
-  img {
-  width: 200px;
-  height: 350px;
-  object-fit: cover;
+  .reset-size {
+  width: 286px;
+  height: 180px;
 }
 }
 .thumbs-up {

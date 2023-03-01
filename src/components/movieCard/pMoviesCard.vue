@@ -55,7 +55,7 @@ const router = useRouter()
                 <fa icon="thumbs-up" class="thumbs-up ms-2"/>
               </p>
               
-              <button class="btn btn-secondary position-absolute bottom-0 mb-3 ms-2">Learn more</button>
+              <button class="btn btn-secondary position-absolute bottom-0 mb-3">Learn more</button>
             </div>
           </div>
         </div>

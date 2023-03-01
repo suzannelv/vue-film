@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 // Liaison bidirectionnelle sur un élément de saisie de formulaire
 const searchValue = ref("")
+
 </script>
 
 <template>
@@ -13,4 +14,4 @@ const searchValue = ref("")
 </template>
 
 <style lang="less" scoped>
-</style>
+</style> 

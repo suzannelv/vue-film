@@ -16,7 +16,7 @@ const posterPath = tvPosterPath
  * Lorsque la fonction itemClick est appelée, elle prend un argument id, qui est l'identifiant de la tv sélectionné. 
  * La fonction utilise ensuite la méthode push de l'objet router pour naviguer vers la route "/detailtv/" + id. 
  */
- const router = useRouter()
+ const router = useRouter() 
 const itemClick = (id) => {
   router.push("/detailtv/" + id)
 }
@@ -29,33 +29,36 @@ const getMoreTv = () => {
 
 
 <template> 
-  <div class="container latest-tv text-center">
-    <span class="diviser-line d-inline-block mb-4"></span>
-    <h2>TV Show on Air</h2>
+  <div class="container-fluid latest-tv">
+    <span class="diviser-line d-inline-block mb-4 text-center"></span>
+    <h2 class="text-center">TV Show on Air</h2>
     <div class="row my-5">
-       <div class="col d-flex flex-wrap">
         <!-- parcourir les tv récentes -->
          <template v-for="tv in latestTv" :key="tv.id">
-          <div class="tv-card"  @click="itemClick(tv.id)">
-            <div class="poster" v-if="tv.poster_path">
+            <div class="col my-4" @click="itemClick(tv.id)">
+              <div class="card tv-card mx-auto" style="width: 18rem;">
+                <div class="poster" v-if="tv.poster_path">
               <!-- affiche de tv -->
-                <img :src="posterPath + tv.poster_path" alt="poster">
-              </div>
-              <div class="text">
-                <!-- titre -->
-                <h5>{{ tv.name }}</h5>  
-                <!-- date de sortie -->
-                <small class="text-secondary" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
-                <!-- popularité -->
-                <p>
-                  <van-rate :model-value ="tv.popularity" allow-half readonly color="#f4f431"/>
-                  <fa icon="thumbs-up" class="thumbs-up ms-2"/>
-                </p>
-              </div>
-          </div>
-               
+                  <img :src="posterPath + tv.poster_path" class="card-img-top" alt="poster">
+                </div>
+                <div class="poster-substitute" v-else>
+                  <img src="@/assets/img/avatar/switch.jpg" alt="">
+                </div>
+                <div class="text card-body reset-size">
+                  <!-- titre -->
+                  <h5 class="card-title">{{ tv.name }}</h5>  
+                  <!-- date de sortie -->
+                  <small class="text-secondary fs-6" v-if="tv.first_air_date">({{ tv.first_air_date }})</small>
+                  <!-- popularité -->
+                  <p>
+                    <van-rate :model-value ="tv.popularity" allow-half readonly color="#f4f431"/>
+                    <fa icon="thumbs-up" class="thumbs-up ms-2"/>
+                  </p>
+                  <button class="btn btn-secondary position-absolute bottom-0 mb-3">Learn more</button> 
+                </div>
+            </div>
+          </div>     
         </template>
-      </div>
     </div>
   </div>
   <!--  utiliser 'van-divider' pour ajouter une ligne de séparation horizontale -->
@@ -71,17 +74,15 @@ const getMoreTv = () => {
 <style lang="less" scoped>
 
 .tv-card {
-  width: 220px;
-  height: 500px;
-  img {
-  width: 200px;
-  height: 350px;
-  object-fit: cover;
-}
+  .reset-size {
+  width: 286px;
+  height: 180px;
 }
 .thumbs-up {
   color:var(--primary-color);
 }
+}
+
 .loadBtn {
   background-color: rgb(152, 190, 192);
 }

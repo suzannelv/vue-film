@@ -34,7 +34,7 @@ const router = useRouter()
 </script>
 
 <template>
-  <div class="pTv container-fluid">
+  <div class="popular-tv container-fluid">
     <div class="row">
       <!--parcourir le tableau de tv popularTv et crée une carte pour chaque tv. La propriété :key est utilisée pour aider à identifier chaque élément dans la liste.  -->
       <template v-for="tv in popularTv" :key="tv.id">

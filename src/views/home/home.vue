@@ -78,6 +78,8 @@ import backUp from '@/components/back-up/backUp.vue';
       <search/>
     </div>
 
+    
+
     <!-- Section films populaires -->
     <popularMovies/>
 
