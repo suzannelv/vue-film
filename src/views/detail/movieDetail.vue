@@ -13,7 +13,7 @@ import { ref, onMounted } from 'vue';
   // récupérer la valeur de l'ID du film dans l'URL de la page actuelle
   const movieId = route.params.id;
 
-  // définir une référence appelée detailMovie qui est un objet vide pour stocker les détail du film récupérés ) partir de l'API 
+  // définir une référence appelée detailMovie qui est un objet vide pour stocker les détail du film récupérés à partir de l'API 
   const detailMovie = ref({});
 
   // récupérer les données de chaque film selon leur ID
