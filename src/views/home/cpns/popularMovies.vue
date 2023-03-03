@@ -13,7 +13,5 @@ import pMoviesCard from '@/components/movieCard/pMoviesCard.vue';
   </div>
 </template>
 
-
-
 <style lang="less" scoped>
 </style>

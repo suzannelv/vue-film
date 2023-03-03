@@ -21,7 +21,6 @@ const {similarTv} = storeToRefs(similarTvStore)
 
 const posterPath = tvPosterPath
 
-
 </script>
 
 
@@ -56,7 +55,6 @@ const posterPath = tvPosterPath
     </div>
   </div>
 </template>
-
 
 
 <style lang="less" scoped>

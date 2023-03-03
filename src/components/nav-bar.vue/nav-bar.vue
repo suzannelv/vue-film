@@ -49,12 +49,12 @@ const itemClick = (item) => {
               </li>
             </ul>
           </template>
-          <!-- chercher -->
+          <!-- barre de recherche -->
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <span class="text-light fs-3 me-5"><fa icon="magnifying-glass"/></span>
           </form>
-       <!-- section conecter le compte -->
+       <!-- section pour conecter le compte -->
           <login/>
         </div>
       

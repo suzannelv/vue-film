@@ -6,14 +6,7 @@ const useLoadingStore = defineStore("loading", {
     // initialiser true
     isLoading: true,
   }),
-  actions: {
-    startLoading() {
-      this.isLoading = true
-    },
-    stopLoading() {
-      this.isLoading = false
-    }
-  }
+ 
 })
 
 export default useLoadingStore

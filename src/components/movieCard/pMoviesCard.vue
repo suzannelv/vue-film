@@ -76,9 +76,10 @@ const router = useRouter()
 .reset-size {
   width: 286px;
   height: 180px;
-}
-.thumbs-up {
+  
+  .thumbs-up {
   color:var(--primary-color);
+}
 }
 
 .loadBtn {

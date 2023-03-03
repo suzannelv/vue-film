@@ -18,6 +18,7 @@ import { ref, onMounted } from 'vue';
 
   // récupérer les données de chaque film selon leur ID
   const fetchDetailMovie = async () => {
+    // un bloc try qui permet de gérer les erreurs dans le code
       try {
           const response = await ffRequest.get({
             url: `movie/${movieId}`,
@@ -60,8 +61,9 @@ import { ref, onMounted } from 'vue';
            join(' &#8226 ') est utilisé pour joindre les noms de genre avec un symbole de point central. -->
            {{ detailMovie.genres.slice(0, 3).map(genre => genre.name).join(' &#8226 ') }}
         </div>
+
         <div class="movie_info ms-3">
-          <!-- afficher la note moyenne d'un film sur une échelle de 0 à 10 avec une icône d'étoile avant le nombre. -->
+          <!-- afficher la note moyenne d'un film -->
           <!--  
             Utiliser un opérateur ternaire pour vérifier si la note moyenne existe (si elle n'est pas null ou undefined)
             Si la note moyenne existe, cette expression utilise la méthode toFixed() pour arrondir la note moyenne à un chiffre après la virgule. 
@@ -72,8 +74,8 @@ import { ref, onMounted } from 'vue';
             <span>{{ detailMovie.release_date }}</span> |
             <span>{{ detailMovie.runtime }}min</span>
             <!-- nom de toutes les compagnies de production associées à un film -->
-            <div v-if="detailMovie.production_companies" class="my-3 fw-bolder">
-              {{detailMovie.production_companies.map(company => company.name).join(',') }}
+            <div v-if="detailMovie.production_companies" class="my-3">
+              Production Companies: {{detailMovie.production_companies.map(company => company.name).join(', ') }}
             </div>
         </div>
         
@@ -83,6 +85,7 @@ import { ref, onMounted } from 'vue';
             <button class="btn btn-secondary"><fa icon="crown" class="crown me-2"/>Join VIP to enjoin fantasy content!</button>
           </router-link>
         </div>
+
         <!-- description du film -->
         <div class="description my-3">
           <p> 

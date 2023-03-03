@@ -1,4 +1,5 @@
 <script setup>
+
 import { tvPosterPath } from '@/services/request/config';
 import useTvStore from '@/stores/modules/tvStore';
 import { storeToRefs } from 'pinia';

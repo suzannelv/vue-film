@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-
+// créer une instance de Vue Router
 const router = createRouter({
+  // gérer l'historique de navigation de l'application
   history: createWebHistory(import.meta.env.BASE_URL),
   // path -> components
-  // Lazy Loading Routes->un moyen de diviser le code d'acheminement en plusieurs petits morceaux de code et de les charger uniquement lorsque cela est nécessaire.
+  // Lazy Loading Routes->charger le composant de manière asynchrone, un moyen de diviser le code d'acheminement en plusieurs petits morceaux de code et de les charger uniquement lorsque cela est nécessaire.
   // Cela peut réduire efficacement le temps de chargement initial et améliorer les performances de l'application .
   routes: [
     {

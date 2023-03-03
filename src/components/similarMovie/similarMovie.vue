@@ -22,7 +22,6 @@ const {similarMovies} = storeToRefs( similarMovieStore)
 // crée une variable "posterPath" qui contient le chemin d'accès aux images de poster de film à partir de la variable "moviePosterPath" du module de configuration de la requête.
 const posterPath = moviePosterPath
 
-
 </script>
 
 <template>
@@ -70,6 +69,4 @@ const posterPath = moviePosterPath
   color:var(--primary-color);
 }
 }
-
-
 </style>

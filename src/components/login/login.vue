@@ -1,6 +1,7 @@
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
+
 // l'utilisateur n'est pas connecté au début
 const isLogin = ref(false)
 // la fenêtre de connexion est masquée.
@@ -35,12 +36,6 @@ const logout = () => {
   uname.value = ''
   upwd.value = ''
 }
-// la fonction watch surveille les changements des variables uname et upwd. 
-watch([uname, upwd], () => {
-  if (isLogin.value) {
-    isLogin.value = false
-  }
-})
 
 </script>
 
@@ -83,7 +78,7 @@ watch([uname, upwd], () => {
       </form>
     </div>
      <!-- utiliser la directive :style pour basculer la visibilité de l'arrière-plan derrière la boîte de connexion pour assombrir l'arrière-plan et mettre en valeur la boîte de connexion.
-      Si log vaut 0, la div est masquée (affichage : aucun), sinon elle est affichée (affichage : bloc) -->
+      Si log vaut 0, la div est masquée, sinon elle est affichée -->
     <div id="back" :style="{ display: log === 0 ? 'none' : 'block' }"></div>
   </div>
 </template>
