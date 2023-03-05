@@ -1,5 +1,4 @@
 <script setup>
-import search from './cpns/search.vue';
 import popularMovies from './cpns/popularMovies.vue';
 import popularTv from './cpns/popularTv.vue';
 import backUp from '@/components/back-up/backUp.vue';
@@ -73,11 +72,6 @@ import backUp from '@/components/back-up/backUp.vue';
   </div>
 
     <backUp/>
-    <!--Section rechercher -->
-    <div class="search">
-      <search/>
-    </div>
-
     
 
     <!-- Section films populaires -->

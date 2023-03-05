@@ -28,7 +28,7 @@ const posterPath = moviePosterPath
   <div class="container-fluid similar-movie text-center">
     <span class="diviser-line d-inline-block mb-4"></span>
     <h2>Similar Movies</h2>
-    <div class="row my-5 ">
+    <div class="row my-5">
       <div class="col d-flex flex-wrap">
         <!--  crée un modèle de répétition (v-for) sur le tableau "similarMovies" et créer un élément pour chaque objet "movie". La clé ":key" est utilisée pour améliorer la performance de la répétition en identifiant chaque élément avec une clé unique. -->
          <template v-for="movie in similarMovies" :key="movie.id">

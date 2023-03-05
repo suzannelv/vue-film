@@ -2,6 +2,7 @@
 import navbarData from '@/assets/data/navbar.js';
 import login from '../login/login.vue';
 import {useRouter} from 'vue-router';
+import search from '../search/search.vue';
 
 // Lorsque la fonction itemClick est appelée, elle utilise l'objet router pour naviguer vers la route associée à l'élément de navigation cliqué. 
 const router = useRouter()
@@ -50,10 +51,11 @@ const itemClick = (item) => {
             </ul>
           </template>
           <!-- barre de recherche -->
-          <form class="d-flex" role="search">
+          <!-- <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <span class="text-light fs-3 me-5"><fa icon="magnifying-glass"/></span>
-          </form>
+          </form> -->
+          <search/>
        <!-- section pour conecter le compte -->
           <login/>
         </div>

@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router';
 
 // la fonction usePMoviesStore() pour instancier le magasin "popular movies". 
 const pMovieStore = useMoviesStore()
+
 // on appele la méthide fetchPopularMovies() pour récupérer les données sur les films populaires.
 pMovieStore.fetchPopularMovies()
 // la fonction storeToRefs() pour transformer la propriété « popularMovies » de l'état du magasin en un objet réactif. 

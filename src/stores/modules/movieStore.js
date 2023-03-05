@@ -6,6 +6,7 @@ const useMoviesStore = defineStore("movies", {
   state: () => ({
     // propriété ‘popularMovies’ initialisée à un objet vide
     popularMovies: [],
+    filteredMovies: [],
     currentPage: 1,
     similarMovies: [],
     comingMovies: [],
@@ -21,6 +22,7 @@ const useMoviesStore = defineStore("movies", {
       this.popularMovies.push(...res.results)
           // la propriété "currentPage" est incrémentée pour récupérer la page suivante lors de l'appel suivant à cette action.
       this.currentPage++
+
     }, 
 
     
